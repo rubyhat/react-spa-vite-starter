@@ -1,28 +1,21 @@
 import toast from "react-hot-toast";
-import {
-  Box,
-  Button,
-  FormHelperText,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
+
 import {
   LoginFormDataTypes,
   LoginFormValidationSchema,
 } from "../../validations";
 import { loginFormStyles } from "./styles";
+import { LoginFormTextField } from "../LoginFormTextField";
 
 export const LoginForm = () => {
   const methods = useForm<LoginFormDataTypes>({
     resolver: zodResolver(LoginFormValidationSchema),
     defaultValues: { login: "", password: "" },
   });
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = methods;
+  const { handleSubmit } = methods;
 
   const handleFormSubmit = (data: LoginFormDataTypes) => {
     console.log(data);
@@ -41,36 +34,17 @@ export const LoginForm = () => {
         <Typography component="h1" variant="h4">
           Аутентификация
         </Typography>
-        <Box>
-          <Controller
-            name="login"
-            render={({ field }) => (
-              <TextField
-                {...field}
-                placeholder="Введите логин"
-                label="Логин"
-                sx={{ width: 1 }}
-              />
-            )}
-          />
-          <FormHelperText error>{errors.login?.message}</FormHelperText>
-        </Box>
-        <Box>
-          <Controller
-            name="password"
-            render={({ field }) => (
-              <TextField
-                {...field}
-                placeholder="Введите пароль"
-                type="password"
-                label="Пароль"
-                sx={{ width: 1 }}
-              />
-            )}
-          />
-
-          <FormHelperText error>{errors.password?.message}</FormHelperText>
-        </Box>
+        <LoginFormTextField
+          name="login"
+          label="Логин"
+          placeholder="Введите логин"
+        />
+        <LoginFormTextField
+          name="password"
+          label="Пароль"
+          placeholder="Введите пароль"
+          type="password"
+        />
         <Box>
           <Button
             type="submit"

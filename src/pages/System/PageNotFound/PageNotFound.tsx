@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Box, Container, Typography } from "@mui/material";
 
 export const PageNotFound = () => {

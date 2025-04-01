@@ -1,14 +1,22 @@
-import { Container, Grid2 } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { LoginForm } from "./components/LoginForm";
 
+/**
+ * Модуль страницы входа в систему.
+ *
+ * - Центрирует форму входа (`LoginForm`) по горизонтали и вертикали.
+ * - Использует `Grid2` для адаптивного расположения формы.
+ *
+ * @returns React-компонент модуля входа
+ */
 export const LoginModule = () => {
   return (
     <Container>
-      <Grid2 container justifyContent="center" alignItems="center">
-        <Grid2 size={{ xs: 12, md: 6 }} py={10}>
+      <Grid container justifyContent="center" alignItems="center">
+        <Grid size={{ xs: 12, md: 6 }} py={10}>
           <LoginForm />
-        </Grid2>
-      </Grid2>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

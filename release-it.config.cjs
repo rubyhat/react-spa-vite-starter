@@ -12,6 +12,6 @@ module.exports = {
     release: true,
   },
   hooks: {
-    "before:init": ["npm run lint", "npm run format"],
+    "before:init": ["npm run precommit"],
   },
 };

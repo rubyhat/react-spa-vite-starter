@@ -1,3 +1,9 @@
-// Мок svg для jest тестов
-export default "SvgrURL";
-export const ReactComponent = "div";
+import React from "react";
+
+export default function SvgMock() {
+  return React.createElement("svg", {});
+}
+
+export const ReactComponent = function SvgComponent() {
+  return React.createElement("svg", {});
+};

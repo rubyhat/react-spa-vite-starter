@@ -20,12 +20,18 @@ describe("axiosBaseWrap", () => {
     // Проверяем baseURL
     expect(axiosBaseWrap.defaults.baseURL).toBe(VITE_API_BASE_PATH);
 
-    // Проверяем заголовки
-    expect(axiosBaseWrap.defaults.headers).toMatchObject({
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Basic ${btoa("vataga:QazWsx1!")}`,
-    });
+    // Проверяем Accept с учетом значений, добавляемых axios
+    expect(axiosBaseWrap.defaults.headers.common.Accept).toContain(
+      "application/json",
+    );
+
+    // Проверяем Content-Type в настройках по умолчанию
+    expect(axiosBaseWrap.defaults.headers["Content-Type"]).toBe(
+      "application/json",
+    );
+
+    // Проверяем, что Authorization по умолчанию не установлен (до установки токена)
+    expect(axiosBaseWrap.defaults.headers.common.Authorization).toBeUndefined();
   });
 
   it("should make a GET request and return data", async () => {

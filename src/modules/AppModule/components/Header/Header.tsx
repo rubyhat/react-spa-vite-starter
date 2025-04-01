@@ -1,4 +1,3 @@
-import React from "react";
 import { AppBar, Box, Container, Toolbar } from "@mui/material";
 import { HeaderProfile } from "../HeaderProfile";
 import { HeaderNavigation } from "../HeaderNavigation";

@@ -11,8 +11,7 @@ const config = {
   },
   moduleFileExtensions: ["js", "ts", "tsx"],
   moduleNameMapper: {
-    "\\.svg": "<rootDir>/src/shared/__mocks__/svgrMock.js",
-    "^.+\\.svg$": "jest-svg-transformer",
+    "^.+\\.svg$": "<rootDir>/src/shared/__mocks__/svgrMock.js",
     "^.+\\.(css|scss)$": "identity-obj-proxy",
     "^../../constants/envs$": "<rootDir>/src/constants/__mocks__/envs.ts",
   },

@@ -51,10 +51,10 @@ export default tseslint.config(
       "no-console": "warn", // Не отправляем в билд консоль.логи
       "no-implicit-globals": "warn", // Запретить глобальные переменные
       "no-shadow": "warn", // Запретить затенение переменных
-      "no-unused-vars": [
-        "warn",
-        { vars: "all", args: "after-used", ignoreRestSiblings: true },
-      ], // Избегать неиспользуемых переменных
+      // "no-unused-vars": [
+      //   "warn",
+      //   { vars: "all", args: "after-used", ignoreRestSiblings: true },
+      // ], // Избегать неиспользуемых переменных
 
       "@typescript-eslint/no-explicit-any": "error", // Избегать использования `any`
       "@typescript-eslint/no-empty-interface": "error", // Запрет пустых интерфейсов

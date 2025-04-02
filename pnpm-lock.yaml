@@ -107,6 +107,12 @@ importers:
       "@types/react-dom":
         specifier: ^19.0.4
         version: 19.1.1(@types/react@19.1.0)
+      "@typescript-eslint/eslint-plugin":
+        specifier: ^8.29.0
+        version: 8.29.0(@typescript-eslint/parser@8.29.0(eslint@9.23.0)(typescript@5.8.2))(eslint@9.23.0)(typescript@5.8.2)
+      "@typescript-eslint/parser":
+        specifier: ^8.29.0
+        version: 8.29.0(eslint@9.23.0)(typescript@5.8.2)
       "@vitejs/plugin-react-swc":
         specifier: ^3.8.1
         version: 3.8.1(vite@6.2.4(@types/node@22.13.17)(sass@1.86.1)(yaml@2.7.1))

@@ -30,6 +30,12 @@ export default defineConfig({
             if (id.includes("date-fns")) return "vendor-date";
             if (id.includes("axios")) return "vendor-axios";
             if (id.includes("zod")) return "vendor-zod";
+            if (id.includes("react-hook-form") || id.includes("@hookform"))
+              return "vendor-hookform";
+            if (id.includes("zustand")) return "vendor-zustand";
+            if (id.includes("js-cookie")) return "vendor-cookie";
+            if (id.includes("jwt-decode")) return "vendor-jwt";
+            if (id.includes("react-icons")) return "vendor-icons";
             if (id.includes("@tanstack/react-query"))
               return "vendor-react-query";
             if (id.includes("react")) return "vendor-react";

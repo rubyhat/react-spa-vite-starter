@@ -87,25 +87,25 @@
 3. **Установите зависимости**:
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 4. **Запустите проект в режиме разработки**:
 
    ```bash
-   npm run dev
+   pnpm run dev
    ```
 
 5. **Соберите проект для продакшена**:
 
    ```bash
-   npm run build
+   pnpm run build
    ```
 
 6. **Предпросмотр сборки**:
 
    ```bash
-   npm run preview
+   pnpm run preview
    ```
 
 ---
@@ -115,7 +115,7 @@
 Тесты проекта написаны с использованием Jest. Для запуска всех тестов выполните:
 
 ```bash
-npm run test
+pnpm run test
 ```
 
 Результаты покрытия кода тестами находятся в папке `coverage`.
@@ -127,5 +127,5 @@ npm run test
 Процесс релиза управляется `release-it`. Для создания нового релиза выполните:
 
 ```bash
-npm run release
+pnpm run release
 ```

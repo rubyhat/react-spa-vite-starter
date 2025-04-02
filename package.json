@@ -12,11 +12,12 @@
     "test": "jest",
     "preview": "vite preview",
     "prepare": "husky",
-    "precommit": "npm run format && npm run lint && npm run test && npm run gen-docs",
+    "precommit": "pnpm run format && pnpm run lint && pnpm run test && pnpm run gen-docs",
     "release": "release-it",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "gen-docs": "typedoc"
+    "gen-docs": "typedoc",
+    "upgrade": "ncu -u && pnpm install"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -51,6 +52,7 @@
     "@types/jest": "^29.5.14",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.16",
+    "@types/node": "^22.13.17",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react-swc": "^3.8.1",

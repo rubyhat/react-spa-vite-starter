@@ -74,6 +74,7 @@
     "prettier": "^3.5.3",
     "react-icons": "^5.5.0",
     "release-it": "^18.1.2",
+    "rollup-plugin-visualizer": "^5.14.0",
     "ts-jest": "^29.3.0",
     "typedoc": "^0.28.1",
     "typedoc-plugin-missing-exports": "^4.0.0",

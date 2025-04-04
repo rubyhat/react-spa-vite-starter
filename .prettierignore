@@ -5,3 +5,4 @@ node_modules/
 
 # Игнорировать конкретные файлы
 package-lock.json
+pnpm-lock.yaml

@@ -1,1 +1,1 @@
-export * from "./HeaderNavigation";
+export { HeaderNavigation } from "./HeaderNavigation";

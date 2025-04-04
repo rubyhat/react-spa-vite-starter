@@ -3,7 +3,11 @@ import Cookies from "js-cookie";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useLoginStore } from "../../LoginModule/store";
-import { isTokenExpired, refreshAccessToken } from "../../../shared/utils";
+import {
+  devLogger,
+  isTokenExpired,
+  refreshAccessToken,
+} from "../../../shared/utils";
 
 /**
  * Хук для проверки и обновления токена аутентификации.
@@ -42,7 +46,7 @@ export const useCheckToken = () => {
           throw new Error("Не удалось обновить токен");
         }
       } catch (error) {
-        console.error("Ошибка обновления токена:", error);
+        devLogger.error("Ошибка обновления токена:", error);
         setLastVisitedUrl(location.pathname);
         navigate("/login");
       } finally {

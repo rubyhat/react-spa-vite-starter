@@ -5,3 +5,6 @@ export * from "./isTokenExpired";
 
 // Basic date methods
 export * from "./formatDateTime";
+
+// dev utils
+export * from "./devLogger";

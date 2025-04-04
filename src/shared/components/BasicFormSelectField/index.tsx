@@ -1,1 +1,1 @@
-export * from "./BasicFormSelectField";
+export { BasicFormSelectField } from "./BasicFormSelectField";

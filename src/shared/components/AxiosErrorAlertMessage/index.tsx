@@ -1,1 +1,1 @@
-export * from "./AxiosErrorAlertMessage";
+export { AxiosErrorAlertMessage } from "./AxiosErrorAlertMessage";

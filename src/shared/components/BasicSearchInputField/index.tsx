@@ -1,1 +1,1 @@
-export * from "./BasicSearchInputField";
+export { BasicSearchInputField } from "./BasicSearchInputField";

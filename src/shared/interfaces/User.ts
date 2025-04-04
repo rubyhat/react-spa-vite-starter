@@ -1,8 +1,8 @@
 /**
  * Перечисление ролей пользователей
- * @value USER - Пользователь
- * @value ADMIN - Админ
- * @value DISPATCHER - Диспетчер
+ * @enum {string} USER - Пользователь
+ * @enum {string} ADMIN - Админ
+ * @enum {string} DISPATCHER - Диспетчер
  */
 export enum UserRole {
   USER = "USER",
@@ -12,9 +12,9 @@ export enum UserRole {
 
 /**
  * Отображаемый текст для ролей пользователей
- * @value USER - Пользователь
- * @value ADMIN - Админ
- * @value DISPATCHER - Диспетчер
+ * @enum {string} USER - Пользователь
+ * @enum {string} ADMIN - Админ
+ * @enum {string} DISPATCHER - Диспетчер
  */
 export enum UserRoleDisplayText {
   USER = "Пользователь",
@@ -24,9 +24,9 @@ export enum UserRoleDisplayText {
 
 /**
  * Статусы пользователей, правила обновления по порядку, то есть awaiting - approved - blocked
- * @value AWAITING - На проверке
- * @value APPROVED - Подтвержден
- * @value BLOCKED - Заблокирован
+ * @enum {string} AWAITING - На проверке
+ * @enum {string} APPROVED - Подтвержден
+ * @enum {string} BLOCKED - Заблокирован
  */
 export enum UserStatus {
   AWAITING = "AWAITING",
@@ -36,9 +36,9 @@ export enum UserStatus {
 
 /**
  * Отображаемый текст для статуса пользователя
- * @value AWAITING - На проверке
- * @value APPROVED - Подтвержден
- * @value BLOCKED - Заблокирован
+ * @enum {string} AWAITING - На проверке
+ * @enum {string} APPROVED - Подтвержден
+ * @enum {string} BLOCKED - Заблокирован
  */
 export enum UserStatusDisplayText {
   AWAITING = "На проверке",

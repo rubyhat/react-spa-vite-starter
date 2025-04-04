@@ -1,1 +1,1 @@
-export * from "./SearchInputForm";
+export { SearchInputForm } from "./SearchInputForm";

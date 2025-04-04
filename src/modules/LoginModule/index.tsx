@@ -1,1 +1,1 @@
-export * from "./LoginModule";
+export { LoginModule } from "./LoginModule";

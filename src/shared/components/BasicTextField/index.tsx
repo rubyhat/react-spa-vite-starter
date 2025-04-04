@@ -1,1 +1,1 @@
-export * from "./BasicTextField";
+export { BasicTextField } from "./BasicTextField";

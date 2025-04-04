@@ -1,1 +1,1 @@
-export * from "./BasicDrawer";
+export { BasicDrawer } from "./BasicDrawer";

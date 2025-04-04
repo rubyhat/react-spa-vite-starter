@@ -19,6 +19,7 @@ export const refreshAccessToken = async (): Promise<string | null> => {
     useLoginStore.setState({ accessToken: data.access_token });
     return data.access_token;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Ошибка обновления токена:", error);
     toast.error("Сессия истекла. Войдите снова.");
     useLoginStore.getState().logout();

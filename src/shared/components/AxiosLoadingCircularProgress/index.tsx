@@ -1,1 +1,1 @@
-export * from "./AxiosLoadingCircularProgress";
+export { AxiosLoadingCircularProgress } from "./AxiosLoadingCircularProgress";

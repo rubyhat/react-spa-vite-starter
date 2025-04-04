@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { UserRole } from "../interfaces";
+import { devLogger } from "./devLogger";
 
 /**
  * Интерфейс декодированного JWT-токена.
@@ -49,7 +50,7 @@ export const decodeToken = (token: string): DecodedToken | null => {
   try {
     return jwtDecode<DecodedToken>(token);
   } catch (error) {
-    console.error("Ошибка декодирования токена", error);
+    devLogger.error("Ошибка декодирования токена", error);
     return null;
   }
 };

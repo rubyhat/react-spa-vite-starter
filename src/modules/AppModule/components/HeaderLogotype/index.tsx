@@ -1,1 +1,1 @@
-export * from "./HeaderLogotype";
+export { HeaderLogotype } from "./HeaderLogotype";

@@ -59,6 +59,7 @@ export const LoginForm = () => {
       navigate(lastVisitedUrl || "/");
       setLastVisitedUrl(null);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Ошибка авторизации:", error);
       toast.error("Ошибка входа. Проверьте логин и пароль.");
     } finally {

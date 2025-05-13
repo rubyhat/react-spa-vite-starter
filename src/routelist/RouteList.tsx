@@ -6,24 +6,37 @@ const Home = React.lazy(() => import("../pages/Home"));
 
 const AccessDenied = React.lazy(() => import("../pages/System/AccessDenied"));
 const PageNotFound = React.lazy(() => import("../pages/System/PageNotFound"));
-const ProtectedRoute = React.lazy(() => import("./ProtectedRoute"));
 
 export const RouteList = () => {
-  const isAuth = true;
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
 
-      <Route
+      {/* TODO: add this example to wiki */}
+      {/* <Route
+        path="/profile/details"
+        element={
+          <RequirePermission
+            permission="viewProfileDetails"
+            // fallback={<Navigate to="/access-denied" replace />}
+          >
+            <PrivatePage />
+          </RequirePermission>
+        }
+      /> */}
+
+      {/* TODO: deprecated, delete after tests */}
+      {/* <Route
         path="/access-denied"
         element={
           <ProtectedRoute isAuth={isAuth}>
             <AccessDenied />
           </ProtectedRoute>
         }
-      />
+      /> */}
+
+      <Route path="/access-denied" element={<AccessDenied />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

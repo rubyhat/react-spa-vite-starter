@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
-import { UserRole } from "../interfaces";
 import { devLogger } from "./devLogger";
+import { UserRole } from "../permissions/roles";
 
 /**
  * Интерфейс декодированного JWT-токена.
@@ -31,10 +31,13 @@ interface DecodedToken {
   exp: number;
 
   /** Роль пользователя в системе */
-  role_name: UserRole;
+  role: UserRole;
 
-  /** Логин пользователя */
-  username: string;
+  /** Телефон пользователя */
+  phone: string;
+
+  /** Телефон пользователя */
+  first_name: string;
 }
 
 /** Тип токена */

@@ -1,7 +1,14 @@
 import React from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { useSearchParams } from "react-router-dom";
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -10,8 +17,8 @@ import {
   LoginFormValidationSchema,
 } from "../../validations";
 import { loginFormStyles } from "./styles";
-import { apiLoginModule } from "../../api/apiLoginModule";
-import { useLoginStore } from "../../store";
+import { useLoginMutation } from "../../hooks";
+import { useRegistrationStore } from "../../../RegistrationModule/store/useRegistrationStore";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 
 /**
@@ -25,82 +32,119 @@ import { BasicTextField } from "../../../../shared/components/BasicTextField";
  * @returns React-компонент формы входа
  */
 export const LoginForm = () => {
-  const navigate = useNavigate();
-  const setAccessToken = useLoginStore((state) => state.setAccessToken);
-  const lastVisitedUrl = useLoginStore((state) => state.lastVisitedUrl);
-  const setLastVisitedUrl = useLoginStore((state) => state.setLastVisitedUrl);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [showSessionEndAlert, setShowSessionEndAlert] =
+    React.useState<boolean>(false);
+  const [params] = useSearchParams();
+  const session_end = params.get("session_end");
+
+  React.useEffect(() => {
+    if (session_end && session_end === "true") {
+      setShowSessionEndAlert(true);
+    } else {
+      setShowSessionEndAlert(false);
+    }
+  }, [session_end]);
+
+  const setShowRegistrationDrawer = useRegistrationStore(
+    (state) => state.setShowRegistrationDrawer,
+  );
 
   const methods = useForm<LoginFormDataTypes>({
     resolver: zodResolver(LoginFormValidationSchema),
-    defaultValues: { username: "", password: "" },
+    defaultValues: { phone: "", password: "" },
   });
 
   const { handleSubmit } = methods;
+  const loginMutation = useLoginMutation();
 
   /**
    * Обрабатывает отправку формы входа.
    *
-   * - Отправляет данные на сервер для авторизации.
-   * - Сохраняет токены в Zustand-хранилище.
-   * - Перенаправляет пользователя на последнюю посещённую страницу.
-   *
-   * @param {LoginFormDataTypes} data Данные формы (логин и пароль)
+   * @param {LoginFormDataTypes} data Данные формы (логин и пароль).
    */
-  const handleFormSubmit = async (data: LoginFormDataTypes) => {
-    setIsLoading(true);
-    try {
-      // todo: вынести в кастомный хук мутации react-query
-      const response = await apiLoginModule.postLogin(data);
-
-      setAccessToken(response.data.access_token, response.data.refresh_token);
-      toast.success("Успешный вход в систему!");
-
-      navigate(lastVisitedUrl || "/");
-      setLastVisitedUrl(null);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Ошибка авторизации:", error);
-      toast.error("Ошибка входа. Проверьте логин и пароль.");
-    } finally {
-      setIsLoading(false);
-    }
+  const handleFormSubmit = (data: LoginFormDataTypes) => {
+    const normalizedData: LoginFormDataTypes = {
+      ...data,
+      phone: data.phone.slice(1), // Удаляем +
+    };
+    loginMutation.mutate(normalizedData);
   };
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
-        onSubmit={handleSubmit(handleFormSubmit)}
-        sx={loginFormStyles}
-      >
-        <Typography component="h1" variant="h4">
-          Аутентификация
-        </Typography>
-        <BasicTextField<LoginFormDataTypes>
-          name="username"
-          label="Логин"
-          placeholder="Введите логин"
-          disabled={isLoading}
-        />
-        <BasicTextField<LoginFormDataTypes>
-          name="password"
-          label="Пароль"
-          placeholder="Введите пароль"
-          type="password"
-          disabled={isLoading}
-        />
-        <Box>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            size="large"
-            fullWidth
-            disabled={isLoading}
+      {showSessionEndAlert && (
+        <Alert severity="error" sx={{ mb: 1 }}>
+          Ваша сессия истекла, пожалуйста, войдите снова.
+        </Alert>
+      )}
+      <Box component={Paper}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(handleFormSubmit)}
+          sx={loginFormStyles}
+        >
+          <Typography component="h1" variant="h4">
+            Добро пожаловать!
+          </Typography>
+
+          <BasicTextField<LoginFormDataTypes>
+            name="phone"
+            label="Телефон"
+            placeholder="Введите телефон"
+            inputName="username"
+            autoComplete="username"
+            disabled={loginMutation.isPending}
+          />
+          <BasicTextField<LoginFormDataTypes>
+            name="password"
+            label="Пароль"
+            placeholder="Введите пароль"
+            type="password"
+            inputName="current-password"
+            autoComplete="current-password"
+            disabled={loginMutation.isPending}
+          />
+          <Typography
+            component="p"
+            variant="body2"
+            sx={{ textDecoration: "underline" }}
+            onClick={() =>
+              toast.error(
+                "Пожалуйста, обратитесь в тех. поддержку, мы восстановим Ваш пароль!",
+              )
+            }
           >
-            {isLoading ? <CircularProgress size={28} /> : "Войти в систему"}
-          </Button>
+            Забыли пароль?
+          </Typography>
+          <Box>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="large"
+              fullWidth
+              disabled={loginMutation.isPending}
+            >
+              {loginMutation.isPending ? (
+                <CircularProgress size={28} />
+              ) : (
+                "Войти в систему"
+              )}
+            </Button>
+            <Typography component="p" variant="body2" my={2} textAlign="center">
+              или
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              fullWidth
+              disabled={loginMutation.isPending}
+              onClick={() => setShowRegistrationDrawer(true)}
+            >
+              Создать аккаунт
+            </Button>
+          </Box>
         </Box>
       </Box>
     </FormProvider>

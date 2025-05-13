@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-
+// TODO: Deprecated, delete after tests
 interface Props {
   isAuth: boolean;
   children: React.JSX.Element;

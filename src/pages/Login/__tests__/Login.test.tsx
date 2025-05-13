@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
 import { Login } from "../Login";
+import { TestProviders } from "../../../providers";
 
 describe("Page Login", () => {
   it("renders the Login page", () => {
     render(
-      <MemoryRouter>
+      <TestProviders>
         <Login />
-      </MemoryRouter>,
+      </TestProviders>,
     );
 
     const rootElement = screen.getByTestId("pageLogin");

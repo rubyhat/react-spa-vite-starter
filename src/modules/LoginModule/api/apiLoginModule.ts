@@ -14,7 +14,7 @@ export const apiLoginModule = {
    */
   postLogin(data: LoginRequestData): Promise<LoginResponseData> {
     return axiosBaseWrap
-      .post<LoginResponseData>("/auth/token/basic", data)
+      .post<LoginResponseData>("/auth/login", data)
       .then((response) => response.data)
       .catch((error) => {
         throw error;
@@ -28,11 +28,11 @@ export const apiLoginModule = {
    * @returns {Promise<LoginResponseData>} Промис с новыми токенами.
    * @throws Ошибка, если запрос не удался.
    */
-  patchLoginRefresh(refreshToken: string): Promise<LoginResponseData> {
+  postLoginRefresh(refreshToken: string): Promise<LoginResponseData> {
     return axiosBaseWrap
-      .patch(
-        "/auth/token/refresh",
-        {},
+      .post(
+        "/auth/refresh",
+        { refresh_token: refreshToken },
         {
           headers: {
             "Content-Type": "application/json",
@@ -40,6 +40,16 @@ export const apiLoginModule = {
           },
         },
       )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
+  },
+
+  // Отправляем запрос на деактивацию токенов пользователя
+  postLogout() {
+    return axiosBaseWrap
+      .post("/auth/logout")
       .then((response) => response.data)
       .catch((error) => {
         throw error;

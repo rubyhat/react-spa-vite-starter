@@ -11,9 +11,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { RouteList } from "../../routelist";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { ToasterProvider } from "../../providers";
+import { GlobalAutofillFix } from "./components/GlobalAutofillFix";
+import { ToasterProvider, AuthProvider } from "../../providers";
 import { customTheme } from "../../themes/customTheme";
-import { AuthProvider } from "../../providers/AuthProvider";
 import { loadingWrapperStyles } from "./styles";
 
 const client = new QueryClient();
@@ -37,6 +37,7 @@ export const AppModule = () => {
       <QueryClientProvider client={client}>
         <ThemeProvider theme={customTheme}>
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ru}>
+            <GlobalAutofillFix />
             {isLoading ? (
               <Box sx={loadingWrapperStyles}>
                 <CircularProgress size={32} color="primary" />

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import Cookies from "js-cookie";
-import { UserRole } from "../../../shared/interfaces";
 import { decodeToken } from "../../../shared/utils";
+import { useUserStore } from "../../UserModule/store";
 
 /**
  * Интерфейс хранилища состояния аутентификации.
@@ -32,11 +32,9 @@ interface LoginStore {
    */
   logout: () => void;
 
-  /** Логин пользователя в системе */
-  username: string | null;
-
-  /** Роль пользователя в системе */
-  role: UserRole | null;
+  /** Флаг, указывающий, что нужно выполнить выход из учетной записи пользователя */
+  shouldLogout: boolean;
+  markLogoutPending: () => void;
 }
 
 /** Время жизни refresh-токена в cookies (в днях) */
@@ -51,8 +49,7 @@ const TOKEN_LIFE_TIME = 1;
 export const useLoginStore = create<LoginStore>((set) => ({
   accessToken: null,
   lastVisitedUrl: null,
-  username: null,
-  role: null,
+  shouldLogout: false,
 
   setAccessToken: (accessToken, refreshToken) => {
     set({ accessToken });
@@ -69,8 +66,13 @@ export const useLoginStore = create<LoginStore>((set) => ({
     /** Сохраняем данные о пользователе в стейт */
     if (accessToken) {
       const decoded = decodeToken(accessToken);
+
       if (decoded) {
-        set({ username: decoded.username, role: decoded.role_name });
+        useUserStore.getState().setUserFromToken({
+          role: decoded.role,
+          phone: decoded.phone,
+          first_name: decoded.first_name,
+        });
       }
     }
   },
@@ -79,8 +81,13 @@ export const useLoginStore = create<LoginStore>((set) => ({
     set({ lastVisitedUrl: url });
   },
 
+  markLogoutPending: () => {
+    set({ shouldLogout: true });
+  },
+
   logout: () => {
-    set({ accessToken: null, lastVisitedUrl: null });
+    set({ accessToken: null, lastVisitedUrl: null, shouldLogout: false });
     Cookies.remove("refresh_token");
+    useUserStore.getState().clearUser();
   },
 }));

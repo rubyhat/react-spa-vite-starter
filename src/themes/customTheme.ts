@@ -85,25 +85,25 @@ export const customTheme = createTheme(
             padding: "4px 16px",
             fontSize: "14px",
             textTransform: "none",
-            borderRadius: 20,
+            borderRadius: 8,
           },
           sizeMedium: {
             padding: "8px 16px",
             fontSize: "15px",
             textTransform: "none",
-            borderRadius: 20,
+            borderRadius: 8,
           },
           sizeLarge: {
             padding: "12px 16px",
             fontSize: "16px",
             textTransform: "none",
-            borderRadius: 20,
+            borderRadius: 8,
           },
         },
       },
     },
     typography: {
-      fontFamily: `"Nunito", "Helvetica", "Roboto", sans-serif`,
+      fontFamily: `"SF Pro", "SF Pro Display", "Helvetica", "Roboto", sans-serif`,
       // Titles
       titleLargeRegular: {
         ...titleLarge,
@@ -193,7 +193,7 @@ export const customTheme = createTheme(
     },
     palette: {
       primary: {
-        main: "#8C52FF",
+        main: "#1c1c1c",
         contrastText: "#fff",
       },
 
@@ -203,14 +203,14 @@ export const customTheme = createTheme(
       },
 
       customColors: {
-        colorsWhite: "#f6f6f6",
+        colorsWhite: "#fff",
         colorsWhiteDark: "#EDEDED",
         colorsGrey: "#848484",
-        colorsGreyLight: "#7A808B",
+        colorsGreyLight: "hsla(240, 6%, 25%, 0.18)",
         colorsGreyDark: "#454C58",
         colorsBlue: "#031930",
 
-        colorsAccent: "#D1BAFF",
+        colorsAccent: "#1c1c1c",
         colorsAccentActive: "#AA80FF",
         colorsAccentHover: "#9561FF",
 
@@ -224,7 +224,10 @@ export const customTheme = createTheme(
 
         colorsAccentSecondary: "#BFB7D0",
 
-        labelsPrimary: "hsla(0, 0%, 0%, 1)",
+        colorsSuccess: "#008000",
+        colorsError: "#FF0000",
+
+        labelsPrimary: "#1C1C1C",
         labelsSecondary: "hsla(240, 6%, 25%, 0.6)",
         labelsTertiary: "hsla(240, 6%, 25%, 0.3)",
         labelsQuaternary: "hsla(240, 6%, 25%, 0.18)",

@@ -6,7 +6,7 @@ import { ru } from "date-fns/locale";
 import { ThemeProvider } from "@emotion/react";
 import { Box, CircularProgress } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import { RouteList } from "../../routelist";
 import { Header } from "./components/Header";

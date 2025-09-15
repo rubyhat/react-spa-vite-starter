@@ -53,14 +53,15 @@ export const useRegistrationFormValidationSchema = z
         message:
           "Пароль должен содержать хотя бы один специальный символ (!*@#$%^&+=_-)",
       }),
-
-    password_confirmation: z
-      .string({
-        required_error: "Подтвердите пароль",
-        invalid_type_error: "Подтвердите пароль",
-      })
-      .min(1, { message: "Подтвердите пароль" }),
+    password_confirmation: z.string().nonempty("Подтвердите пароль"),
   })
+  .refine(
+    (data) => !data.password || data.password === data.password_confirmation,
+    {
+      path: ["password_confirmation"],
+      message: "Пароли не совпадают",
+    },
+  )
   .superRefine((data, ctx) => {
     if (
       data.password_confirmation &&
